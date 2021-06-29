@@ -1,0 +1,162 @@
+*** Settings ***
+Library  Selenium2Library
+Library  BuiltIn
+Library  Collections
+Library  String
+Library  pelagoProductRequest.py
+
+*** Variables ***
+${URL}          https://www.pelago.co/en-sg/activity/pkb3v-gokart-kf1-karting-kranji-singapore/
+
+*** Keywords ***
+extractAndVerifyAPIResponse_Positive
+    #This keyword is used to extract product information based on the valid productId and verify response parameter values with actual values from UI
+    [Arguments]     ${productId}       ${URL}
+    ${apiResponse}=   pelagoAPIRequest          ${productId}
+    Log  ${apiResponse}
+    ${dictToVerifyConfirmationAndCancellation}      Create Dictionary       INSTANT      Instant Confirmation   ALLOW_CANCELLATION        Free cancellation
+    ${productName}=     Get From Dictionary     ${apiResponse}     productName
+    ${shortDescription}=    Get From Dictionary     ${apiResponse}     shortDescription
+    ${address}=    Get From Dictionary     ${apiResponse}     address
+    ${cancellationType}=     Get From Dictionary     ${apiResponse}     cancellationType
+    ${cancellationType}=        Get From Dictionary    ${dictToVerifyConfirmationAndCancellation}       ${cancellationType}
+    ${confirmationType}=     Get From Dictionary     ${apiResponse}     confirmationType
+    ${confirmationType}=        Get From Dictionary    ${dictToVerifyConfirmationAndCancellation}       ${confirmationType}
+    ${priceRangeFrom}=     Get From Dictionary     ${apiResponse}     priceRangeFrom
+    ${priceRangeTo}=     Get From Dictionary     ${apiResponse}     priceRangeTo
+    ${voucherType}=     Get From Dictionary     ${apiResponse}     voucherType
+    ${collectPhysicalTicket}=    Get From Dictionary     ${apiResponse}     collectPhysicalTicket
+    Open Browser        ${URL}     Chrome
+    wait until element is visible       //input[contains(@class,'styles_searchInput__')]
+    Maximize Browser Window
+    ${productNameFromUI}=       Get Text        xpath://h2
+    Should Be Equal     ${productNameFromUI}      ${productName}        ignore_case=True
+
+    ${addressFromUI}=     Get Text        xpath://p[@class='styles_mapAddressDetails__CgRkg']
+    Should Contain     ${addressFromUI}      ${address}        ignore_case=True
+
+    ${confirmationTypeFromUI}       Get Text        xpath:(//div//p[contains(@class,'styles_productHighlightRow')])[1]
+    Should Be Equal     ${confirmationTypeFromUI}      ${confirmationType}        ignore_case=True
+
+    ${cancellationTypeFromUI}       Get Text        xpath:(//div//p[contains(@class,'styles_productHighlightRow')])[2]
+    Should Be Equal     ${cancellationTypeFromUI}      ${cancellationType}        ignore_case=True
+
+    ${collectPhysicalTicketFromUI}       Get Text        xpath:(//div[contains(@class,'styles_productCallout__lpVIw')])[3]//span
+    Run keyword if      ${collectPhysicalTicket}==False      Should Be Equal     Show mobile or printed voucher      ${collectPhysicalTicketFromUI}
+
+    ${priceRangeFromFromUI}       Get Text        xpath:(//p[contains(@class,'styles_optionMinPrice__')])[1]
+    Should Be Equal As Strings     ${priceRangeFromFromUI}     SGD ${priceRangeFrom}0
+
+    ${priceRangeToFromUI}       Get Text        xpath:(//p[contains(@class,'styles_optionMinPrice__')])[2]
+    Should Be Equal As Strings     ${priceRangeToFromUI}     SGD ${priceRangeTo}0
+
+
+    ${voucherTypeFromUI}       Get Text        //div[contains(@class,'s_promoCode__')]//span
+    Should contain any   ${voucherTypeFromUI}      PELAGO        ignore_case=True
+    Close Window
+
+
+extractAndVerifyAPIResponseForReview_Positive
+    #This keyword is used to verify the review parameters value from API response to UI
+    [Arguments]     ${productId}       ${URL}
+    Open Browser        ${URL}     Chrome
+    wait until element is visible       //input[contains(@class,'styles_searchInput__')]
+    Maximize Browser Window
+    ${apiResponse}=   pelagoAPIRequestForReview             ${productId}
+    Log  ${apiResponse}
+    ${review}=     Get From List	     ${apiResponse}    0
+    ${rating}=     Get From Dictionary     ${review}     rating
+    ${ratingFromUI}     get element attribute       xpath:(//div[1][@class='styles_reviewItemRow__3r1wA'])[1]//fieldset       title
+    Should Be Equal As Numbers    ${ratingFromUI}     ${rating}       ignore_case=true
+    ${comment}=     Get From Dictionary     ${review}     comment
+    ${commentFromUI}       Get Text        (//p[contains(@class,'styles_reviewItemComment__')])[1]
+    #Should Be Equal     ${commentFromUI}      ${comment}        strip_spaces=true
+    ${travellerType}=     Get From Dictionary     ${review}     travellerType
+    ${travellerTypeFromUI}       Get Text        (//div[contains(@class,'styles_reviewItemCustomerInfo__')])[1]//P[2]
+    Should Be Equal     ${travellerTypeFromUI}      ${travellerType}        strip_spaces=true
+    ${customer}=     Get From Dictionary     ${review}     customer
+    ${firstName}=     Get From Dictionary     ${customer}     firstName
+    ${firstNameFromUI}       Get Text        (//div[contains(@class,'styles_reviewItemCustomerInfo__')])[1]//P[1]
+    Should Be Equal     ${firstNameFromUI}      ${firstName}        strip_spaces=true
+
+
+
+    ${review}=     Get From List	     ${apiResponse}    1
+    ${rating}=     Get From Dictionary     ${review}     rating
+    ${ratingFromUI}     get element attribute       xpath:(//div[1][@class='styles_reviewItemRow__3r1wA'])[2]//fieldset       title
+    Should Be Equal As Numbers    ${ratingFromUI}     ${rating}       ignore_case=true
+    ${comment}=     Get From Dictionary     ${review}     comment
+    ${commentFromUI}       Get Text        (//p[contains(@class,'styles_reviewItemComment__')])[2]
+    #Should Be Equal     ${commentFromUI}      ${comment}        ignore_case=True
+    ${travellerType}=     Get From Dictionary     ${review}     travellerType
+    ${travellerTypeFromUI}       Get Text        (//div[contains(@class,'styles_reviewItemCustomerInfo__')])[2]//P[2]
+    Should Be Equal     ${travellerTypeFromUI}      ${travellerType}        strip_spaces=true
+    ${customer}=     Get From Dictionary     ${review}     customer
+    ${firstName}=     Get From Dictionary     ${customer}     firstName
+    ${firstNameFromUI}       Get Text        (//div[contains(@class,'styles_reviewItemCustomerInfo__')])[2]//P[1]
+    Should Be Equal     ${firstNameFromUI}      ${firstName}        strip_spaces=true
+
+    ${review}=     Get From List	     ${apiResponse}    2
+    ${rating}=     Get From Dictionary     ${review}     rating
+    ${ratingFromUI}     get element attribute       xpath:(//div[1][@class='styles_reviewItemRow__3r1wA'])[3]//fieldset       title
+    Should Be Equal As Numbers    ${ratingFromUI}     ${rating}       ignore_case=true
+    ${comment}=     Get From Dictionary     ${review}     comment
+    ${commentFromUI}       Get Text        (//p[contains(@class,'styles_reviewItemComment__')])[3]
+    #Should Be Equal     ${commentFromUI}      ${comment}        strip_spaces=true
+    ${travellerType}=     Get From Dictionary     ${review}     travellerType
+    ${travellerTypeFromUI}       Get Text        (//div[contains(@class,'styles_reviewItemCustomerInfo__')])[3]//P[2]
+    Should Be Equal     ${travellerTypeFromUI}      ${travellerType}        strip_spaces=true
+    ${customer}=     Get From Dictionary     ${review}     customer
+    ${firstName}=     Get From Dictionary     ${customer}     firstName
+    ${firstNameFromUI}       Get Text        (//div[contains(@class,'styles_reviewItemCustomerInfo__')])[3]//P[1]
+    Should Be Equal     ${firstNameFromUI}      ${firstName}        strip_spaces=true
+
+    ${review}=     Get From List	     ${apiResponse}    3
+    ${rating}=     Get From Dictionary     ${review}     rating
+    ${ratingFromUI}     get element attribute       xpath:(//div[1][@class='styles_reviewItemRow__3r1wA'])[4]//fieldset       title
+    Should Be Equal As Numbers    ${ratingFromUI}     ${rating}       ignore_case=true
+    ${comment}=     Get From Dictionary     ${review}     comment
+    ${commentFromUI}       Get Text        (//p[contains(@class,'styles_reviewItemComment__')])[4]
+    #Should Be Equal     ${commentFromUI}      ${comment}        strip_spaces=true
+    ${travellerType}=     Get From Dictionary     ${review}     travellerType
+    ${travellerTypeFromUI}       Get Text        (//div[contains(@class,'styles_reviewItemCustomerInfo__')])[4]//P[2]
+    Should Be Equal     ${travellerTypeFromUI}      ${travellerType}        strip_spaces=true
+    ${customer}=     Get From Dictionary     ${review}     customer
+    ${firstName}=     Get From Dictionary     ${customer}     firstName
+    ${firstNameFromUI}       Get Text        (//div[contains(@class,'styles_reviewItemCustomerInfo__')])[4]//P[1]
+    Should Be Equal     ${firstNameFromUI}      ${firstName}        strip_spaces=true
+
+    ${review}=     Get From List	     ${apiResponse}    4
+    ${rating}=     Get From Dictionary     ${review}     rating
+    ${ratingFromUI}     get element attribute       xpath:(//div[1][@class='styles_reviewItemRow__3r1wA'])[5]//fieldset       title
+    Should Be Equal As Numbers    ${ratingFromUI}     ${rating}       ignore_case=true
+    ${comment}=     Get From Dictionary     ${review}     comment
+    ${commentFromUI}       Get Text        (//p[contains(@class,'styles_reviewItemComment__')])[5]
+    #Should Be Equal     ${commentFromUI}      ${comment}        strip_spaces=true
+    ${travellerType}=     Get From Dictionary     ${review}     travellerType
+    ${travellerTypeFromUI}       Get Text        (//div[contains(@class,'styles_reviewItemCustomerInfo__')])[5]//P[2]
+    Should Be Equal     ${travellerTypeFromUI}      ${travellerType}        strip_spaces=true
+    ${customer}=     Get From Dictionary     ${review}     customer
+    ${firstName}=     Get From Dictionary     ${customer}     firstName
+    ${firstNameFromUI}       Get Text        (//div[contains(@class,'styles_reviewItemCustomerInfo__')])[5]//P[1]
+    Should Be Equal     ${firstNameFromUI}      ${firstName}        strip_spaces=true
+    Close Window
+
+
+
+*** Test Cases ***
+Extract and verify the information for the valid product id
+    extractAndVerifyAPIResponse_Positive        pkb3v       ${URL}
+
+Extract and verify the reviews when valid product id is given
+    extractAndVerifyAPIResponseForReview_Positive        pkb3v       ${URL}
+
+Verify the error msg when invalid product id is given
+    pelagoErrorMsgForProductInfo        test
+
+Verify the error msg for review API when invalid product id is given
+    pelagoErrorMsgForReview         test
+
+
+
+

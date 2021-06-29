@@ -1,0 +1,1193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.1 (Python 3.8.3 on darwin)" generated="20210629 11:32:22.114" rpa="false">
+<suite id="s1" name="pelagoTestSuite" source="/Users/vishwa/Documents/PelagoAssignment/pelagoTestSuite.txt">
+<test id="s1-t1" name="Extract and verify the information for the valid product id">
+<kw name="extractAndVerifyAPIResponse_Positive">
+<arguments>
+<arg>pkb3v</arg>
+<arg>${URL}</arg>
+</arguments>
+<kw name="Pelago API Request" library="pelagoProductRequest">
+<arguments>
+<arg>${productId}</arg>
+</arguments>
+<assign>
+<var>${apiResponse}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.074" level="INFO">${apiResponse} = {'productId': 'pkb3v', 'productName': "Go-Kart F1-style at Fun Kart's Kranji Circuit", 'destinationId': 'singapore', 'shortDescription': 'Put the pedal to the metal and hit speeds of up to 50 km/h at ...</msg>
+<status status="PASS" starttime="20210629 11:32:22.596" endtime="20210629 11:32:23.075"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+</arguments>
+<msg timestamp="20210629 11:32:23.076" level="INFO">{'productId': 'pkb3v', 'productName': "Go-Kart F1-style at Fun Kart's Kranji Circuit", 'destinationId': 'singapore', 'shortDescription': 'Put the pedal to the metal and hit speeds of up to 50 km/h at KF1 Karting', 'cancellationType': 'ALLOW_CANCELLATION', 'cancellationWindow': 0, 'minGroupSize': None, 'openDateTicket': True, 'collectPhysicalTicket': False, 'confirmationType': 'INSTANT', 'voucherType': 'PELAGO', 'priceRangeFrom': 28.0, 'priceRangeTo': 35.0, 'latitude': '1.423134', 'longitude': '103.7566573', 'address': '1 Turf Club Avenue, Singapore 738078', '__typename': 'Product'}</msg>
+<status status="PASS" starttime="20210629 11:32:23.075" endtime="20210629 11:32:23.076"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>INSTANT</arg>
+<arg>Instant Confirmation</arg>
+<arg>ALLOW_CANCELLATION</arg>
+<arg>Free cancellation</arg>
+</arguments>
+<assign>
+<var>${dictToVerifyConfirmationAndCancellation}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.078" level="INFO">${dictToVerifyConfirmationAndCancellation} = {'INSTANT': 'Instant Confirmation', 'ALLOW_CANCELLATION': 'Free cancellation'}</msg>
+<status status="PASS" starttime="20210629 11:32:23.077" endtime="20210629 11:32:23.078"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>productName</arg>
+</arguments>
+<assign>
+<var>${productName}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.079" level="INFO">${productName} = Go-Kart F1-style at Fun Kart's Kranji Circuit</msg>
+<status status="PASS" starttime="20210629 11:32:23.078" endtime="20210629 11:32:23.079"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>shortDescription</arg>
+</arguments>
+<assign>
+<var>${shortDescription}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.081" level="INFO">${shortDescription} = Put the pedal to the metal and hit speeds of up to 50 km/h at KF1 Karting</msg>
+<status status="PASS" starttime="20210629 11:32:23.080" endtime="20210629 11:32:23.081"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>address</arg>
+</arguments>
+<assign>
+<var>${address}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.082" level="INFO">${address} = 1 Turf Club Avenue, Singapore 738078</msg>
+<status status="PASS" starttime="20210629 11:32:23.081" endtime="20210629 11:32:23.082"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>cancellationType</arg>
+</arguments>
+<assign>
+<var>${cancellationType}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.083" level="INFO">${cancellationType} = ALLOW_CANCELLATION</msg>
+<status status="PASS" starttime="20210629 11:32:23.082" endtime="20210629 11:32:23.083"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dictToVerifyConfirmationAndCancellation}</arg>
+<arg>${cancellationType}</arg>
+</arguments>
+<assign>
+<var>${cancellationType}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.084" level="INFO">${cancellationType} = Free cancellation</msg>
+<status status="PASS" starttime="20210629 11:32:23.083" endtime="20210629 11:32:23.084"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>confirmationType</arg>
+</arguments>
+<assign>
+<var>${confirmationType}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.086" level="INFO">${confirmationType} = INSTANT</msg>
+<status status="PASS" starttime="20210629 11:32:23.085" endtime="20210629 11:32:23.086"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dictToVerifyConfirmationAndCancellation}</arg>
+<arg>${confirmationType}</arg>
+</arguments>
+<assign>
+<var>${confirmationType}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.087" level="INFO">${confirmationType} = Instant Confirmation</msg>
+<status status="PASS" starttime="20210629 11:32:23.086" endtime="20210629 11:32:23.087"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>priceRangeFrom</arg>
+</arguments>
+<assign>
+<var>${priceRangeFrom}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.088" level="INFO">${priceRangeFrom} = 28.0</msg>
+<status status="PASS" starttime="20210629 11:32:23.087" endtime="20210629 11:32:23.088"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>priceRangeTo</arg>
+</arguments>
+<assign>
+<var>${priceRangeTo}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.089" level="INFO">${priceRangeTo} = 35.0</msg>
+<status status="PASS" starttime="20210629 11:32:23.088" endtime="20210629 11:32:23.089"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>voucherType</arg>
+</arguments>
+<assign>
+<var>${voucherType}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.090" level="INFO">${voucherType} = PELAGO</msg>
+<status status="PASS" starttime="20210629 11:32:23.090" endtime="20210629 11:32:23.090"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>collectPhysicalTicket</arg>
+</arguments>
+<assign>
+<var>${collectPhysicalTicket}</var>
+</assign>
+<msg timestamp="20210629 11:32:23.091" level="INFO">${collectPhysicalTicket} = False</msg>
+<status status="PASS" starttime="20210629 11:32:23.091" endtime="20210629 11:32:23.092"></status>
+</kw>
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>Chrome</arg>
+</arguments>
+<msg timestamp="20210629 11:32:23.093" level="INFO">Opening browser 'Chrome' to base url 'https://www.pelago.co/en-sg/activity/pkb3v-gokart-kf1-karting-kranji-singapore/'.</msg>
+<status status="PASS" starttime="20210629 11:32:23.092" endtime="20210629 11:32:28.699"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>//input[contains(@class,'styles_searchInput__')]</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:28.699" endtime="20210629 11:32:28.747"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20210629 11:32:28.747" endtime="20210629 11:32:28.941"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://h2</arg>
+</arguments>
+<assign>
+<var>${productNameFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:28.979" level="INFO">${productNameFromUI} = Go-Kart F1-Style At Fun Kart'S Kranji Circuit</msg>
+<status status="PASS" starttime="20210629 11:32:28.941" endtime="20210629 11:32:28.979"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${productNameFromUI}</arg>
+<arg>${productName}</arg>
+<arg>ignore_case=True</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:28.979" endtime="20210629 11:32:28.980"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://p[@class='styles_mapAddressDetails__CgRkg']</arg>
+</arguments>
+<assign>
+<var>${addressFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:28.998" level="INFO">${addressFromUI} = 1 Turf Club Avenue, Singapore 738078</msg>
+<status status="PASS" starttime="20210629 11:32:28.980" endtime="20210629 11:32:28.998"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${addressFromUI}</arg>
+<arg>${address}</arg>
+<arg>ignore_case=True</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:28.998" endtime="20210629 11:32:28.999"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath:(//div//p[contains(@class,'styles_productHighlightRow')])[1]</arg>
+</arguments>
+<assign>
+<var>${confirmationTypeFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:29.063" level="INFO">${confirmationTypeFromUI} = Instant Confirmation</msg>
+<status status="PASS" starttime="20210629 11:32:28.999" endtime="20210629 11:32:29.063"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${confirmationTypeFromUI}</arg>
+<arg>${confirmationType}</arg>
+<arg>ignore_case=True</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:29.063" endtime="20210629 11:32:29.063"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath:(//div//p[contains(@class,'styles_productHighlightRow')])[2]</arg>
+</arguments>
+<assign>
+<var>${cancellationTypeFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:29.108" level="INFO">${cancellationTypeFromUI} = Free cancellation</msg>
+<status status="PASS" starttime="20210629 11:32:29.064" endtime="20210629 11:32:29.108"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${cancellationTypeFromUI}</arg>
+<arg>${cancellationType}</arg>
+<arg>ignore_case=True</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:29.108" endtime="20210629 11:32:29.109"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath:(//div[contains(@class,'styles_productCallout__lpVIw')])[3]//span</arg>
+</arguments>
+<assign>
+<var>${collectPhysicalTicketFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:29.128" level="INFO">${collectPhysicalTicketFromUI} = Show mobile or printed voucher</msg>
+<status status="PASS" starttime="20210629 11:32:29.109" endtime="20210629 11:32:29.128"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${collectPhysicalTicket}==False</arg>
+<arg>Should Be Equal</arg>
+<arg>Show mobile or printed voucher</arg>
+<arg>${collectPhysicalTicketFromUI}</arg>
+</arguments>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>Show mobile or printed voucher</arg>
+<arg>${collectPhysicalTicketFromUI}</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:29.128" endtime="20210629 11:32:29.129"></status>
+</kw>
+<status status="PASS" starttime="20210629 11:32:29.128" endtime="20210629 11:32:29.129"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath:(//p[contains(@class,'styles_optionMinPrice__')])[1]</arg>
+</arguments>
+<assign>
+<var>${priceRangeFromFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:29.147" level="INFO">${priceRangeFromFromUI} = SGD 28.00</msg>
+<status status="PASS" starttime="20210629 11:32:29.129" endtime="20210629 11:32:29.147"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${priceRangeFromFromUI}</arg>
+<arg>SGD ${priceRangeFrom}0</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:29.147" endtime="20210629 11:32:29.147"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath:(//p[contains(@class,'styles_optionMinPrice__')])[2]</arg>
+</arguments>
+<assign>
+<var>${priceRangeToFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:29.165" level="INFO">${priceRangeToFromUI} = SGD 35.00</msg>
+<status status="PASS" starttime="20210629 11:32:29.147" endtime="20210629 11:32:29.165"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${priceRangeToFromUI}</arg>
+<arg>SGD ${priceRangeTo}0</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:29.166" endtime="20210629 11:32:29.166"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[contains(@class,'s_promoCode__')]//span</arg>
+</arguments>
+<assign>
+<var>${voucherTypeFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:29.183" level="INFO">${voucherTypeFromUI} = PELAGOWELCOME10</msg>
+<status status="PASS" starttime="20210629 11:32:29.166" endtime="20210629 11:32:29.183"></status>
+</kw>
+<kw name="Should Contain Any" library="BuiltIn">
+<doc>Fails if ``container`` does not contain any of the ``*items``.</doc>
+<arguments>
+<arg>${voucherTypeFromUI}</arg>
+<arg>PELAGO</arg>
+<arg>ignore_case=True</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:29.183" endtime="20210629 11:32:29.183"></status>
+</kw>
+<kw name="Close Window" library="Selenium2Library">
+<doc>Closes currently opened and selected browser window/tab.</doc>
+<status status="PASS" starttime="20210629 11:32:29.183" endtime="20210629 11:32:29.267"></status>
+</kw>
+<status status="PASS" starttime="20210629 11:32:22.596" endtime="20210629 11:32:29.267"></status>
+</kw>
+<status status="PASS" starttime="20210629 11:32:22.595" endtime="20210629 11:32:29.267" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Extract and verify the reviews when valid product id is given">
+<kw name="extractAndVerifyAPIResponseForReview_Positive">
+<arguments>
+<arg>pkb3v</arg>
+<arg>${URL}</arg>
+</arguments>
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>Chrome</arg>
+</arguments>
+<msg timestamp="20210629 11:32:29.272" level="INFO">Opening browser 'Chrome' to base url 'https://www.pelago.co/en-sg/activity/pkb3v-gokart-kf1-karting-kranji-singapore/'.</msg>
+<status status="PASS" starttime="20210629 11:32:29.272" endtime="20210629 11:32:34.110"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>//input[contains(@class,'styles_searchInput__')]</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:34.111" endtime="20210629 11:32:34.145"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20210629 11:32:34.145" endtime="20210629 11:32:34.454"></status>
+</kw>
+<kw name="Pelago API Request For Review" library="pelagoProductRequest">
+<arguments>
+<arg>${productId}</arg>
+</arguments>
+<assign>
+<var>${apiResponse}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.813" level="INFO">${apiResponse} = [{'reviewId': '4ff5865c-d334-401e-a57e-deb2ed86f1bc', 'rating': 4.0, 'content': {'comment': '10 min race is a bit too short. '}, 'comment': '10 min race is a bit too short. ', 'status': 'PUBLISHED', '...</msg>
+<status status="PASS" starttime="20210629 11:32:34.455" endtime="20210629 11:32:34.813"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+</arguments>
+<msg timestamp="20210629 11:32:34.813" level="INFO">[{'reviewId': '4ff5865c-d334-401e-a57e-deb2ed86f1bc', 'rating': 4.0, 'content': {'comment': '10 min race is a bit too short. '}, 'comment': '10 min race is a bit too short. ', 'status': 'PUBLISHED', 'activityDate': '2021-06-16T00:00:00', 'dateCreated': '2021-06-17T01:30:08.199759', 'travellerType': 'Family (with teens)', 'customer': {'firstName': 'Nancy', 'lastName': 'Ang', '__typename': 'ReviewCustomer'}, '__typename': 'Review'}, {'reviewId': 'd6cac3fd-d6d5-4528-b6f8-ee16437405f9', 'rating': 4.0, 'content': {'comment': 'The price from pelago was more expensive compared to buying on the spot.\nThe race was good, but it will be good to give all participants an online certificate, i had that when I visited go-kart in Australia, good memory. '}, 'comment': 'The price from pelago was more expensive compared to buying on the spot.\nThe race was good, but it will be good to give all participants an online certificate, i had that when I visited go-kart in Australia, good memory. ', 'status': 'PUBLISHED', 'activityDate': '2021-06-16T00:00:00', 'dateCreated': '2021-06-17T01:28:49.048385', 'travellerType': 'Family (with teens)', 'customer': {'firstName': 'Nancy', 'lastName': 'Ang', '__typename': 'ReviewCustomer'}, '__typename': 'Review'}, {'reviewId': 'a7d1c909-0f35-44c5-8adc-2c7bc9bed844', 'rating': 5.0, 'content': {'comment': 'Definitely worth going for the track experience and 50km/h karts (license needed, picture or actual card) Fun to race with your friends and family '}, 'comment': 'Definitely worth going for the track experience and 50km/h karts (license needed, picture or actual card) Fun to race with your friends and family ', 'status': 'PUBLISHED', 'activityDate': '2020-11-04T00:00:00', 'dateCreated': '2021-05-05T10:14:03.736982', 'travellerType': 'Group of Friends', 'customer': {'firstName': 'Karan', 'lastName': 'Bhalodiya', '__typename': 'ReviewCustomer'}, '__typename': 'Review'}, {'reviewId': '05f5f47a-bf78-47ee-b253-50c8672955f6', 'rating': 5.0, 'content': {'comment': 'I booked Fun Karting at Kranji through Pelago. The entire booking experience was seamless.\nThe activity itself was pretty fun and thrilling, so much so that my friends and I ended up buying one more racing session at the venue.\n\nIf not for Pelago, I wouldn&amp;#x27;t have realised that such a thing exists in Singapore. I will use their website again to explore what else they have to offer here in Singapore.\n\nHighly recommended for a day out with friends and families !!!'}, 'comment': "I booked Fun Karting at Kranji through Pelago. The entire booking experience was seamless.\nThe activity itself was pretty fun and thrilling, so much so that my friends and I ended up buying one more racing session at the venue.\n\nIf not for Pelago, I wouldn't have realised that such a thing exists in Singapore. I will use their website again to explore what else they have to offer here in Singapore.\n\nHighly recommended for a day out with friends and families !!!", 'status': 'PUBLISHED', 'activityDate': '2020-11-04T00:00:00', 'dateCreated': '2021-05-03T16:45:37.789941', 'travellerType': 'Group of Friends', 'customer': {'firstName': 'Vipin Pal', 'lastName': 'Singh', '__typename': 'ReviewCustomer'}, '__typename': 'Review'}, {'reviewId': '2cb69f9f-03e4-46c4-87b6-9ac99ff962ab', 'rating': 5.0, 'content': {'title': 'None', 'comment': "Booked the Advance karting for 5 of us then decided to go for Novice on d-day cos after looking other group who took Advance it was too fast &amp; scary. Had the impression that 10 minutes would be too short for ~S$30 activity, but it was very satisfying! All of us LOVED it and wanted to go again. When we went it was raining which added to the fun, consider to bring change of clothes as we were soaking wet with gravel sticking to us after. If it's your first time, recommend to book the Novice kart."}, 'comment': "Booked the Advance karting for 5 of us then decided to go for Novice on d-day cos after looking other group who took Advance it was too fast &amp; scary. Had the impression that 10 minutes would be too short for ~S$30 activity, but it was very satisfying! All of us LOVED it and wanted to go again. When we went it was raining which added to the fun, consider to bring change of clothes as we were soaking wet with gravel sticking to us after. If it's your first time, recommend to book the Novice kart.", 'status': 'PUBLISHED', 'activityDate': '2021-03-07T00:00:00', 'dateCreated': '2021-04-21T08:11:11.119969', 'travellerType': 'Group of Friends', 'customer': {'firstName': 'Kezia', 'lastName': 'Jenissa ', '__typename': 'ReviewCustomer'}, '__typename': 'Review'}]</msg>
+<status status="PASS" starttime="20210629 11:32:34.813" endtime="20210629 11:32:34.813"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${review}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.814" level="INFO">${review} = {'reviewId': '4ff5865c-d334-401e-a57e-deb2ed86f1bc', 'rating': 4.0, 'content': {'comment': '10 min race is a bit too short. '}, 'comment': '10 min race is a bit too short. ', 'status': 'PUBLISHED', 'a...</msg>
+<status status="PASS" starttime="20210629 11:32:34.814" endtime="20210629 11:32:34.814"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>rating</arg>
+</arguments>
+<assign>
+<var>${rating}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.814" level="INFO">${rating} = 4.0</msg>
+<status status="PASS" starttime="20210629 11:32:34.814" endtime="20210629 11:32:34.814"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<arguments>
+<arg>xpath:(//div[1][@class='styles_reviewItemRow__3r1wA'])[1]//fieldset</arg>
+<arg>title</arg>
+</arguments>
+<assign>
+<var>${ratingFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.832" level="INFO">${ratingFromUI} = 4</msg>
+<status status="PASS" starttime="20210629 11:32:34.815" endtime="20210629 11:32:34.832"></status>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<arguments>
+<arg>${ratingFromUI}</arg>
+<arg>${rating}</arg>
+<arg>ignore_case=true</arg>
+</arguments>
+<msg timestamp="20210629 11:32:34.833" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'float'&gt;</msg>
+<status status="PASS" starttime="20210629 11:32:34.833" endtime="20210629 11:32:34.833"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>comment</arg>
+</arguments>
+<assign>
+<var>${comment}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.833" level="INFO">${comment} = 10 min race is a bit too short. </msg>
+<status status="PASS" starttime="20210629 11:32:34.833" endtime="20210629 11:32:34.833"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//p[contains(@class,'styles_reviewItemComment__')])[1]</arg>
+</arguments>
+<assign>
+<var>${commentFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.850" level="INFO">${commentFromUI} = 10 min race is a bit too short.</msg>
+<status status="PASS" starttime="20210629 11:32:34.833" endtime="20210629 11:32:34.850"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>travellerType</arg>
+</arguments>
+<assign>
+<var>${travellerType}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.851" level="INFO">${travellerType} = Family (with teens)</msg>
+<status status="PASS" starttime="20210629 11:32:34.850" endtime="20210629 11:32:34.851"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//div[contains(@class,'styles_reviewItemCustomerInfo__')])[1]//P[2]</arg>
+</arguments>
+<assign>
+<var>${travellerTypeFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.867" level="INFO">${travellerTypeFromUI} = Family (with teens)</msg>
+<status status="PASS" starttime="20210629 11:32:34.851" endtime="20210629 11:32:34.867"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${travellerTypeFromUI}</arg>
+<arg>${travellerType}</arg>
+<arg>strip_spaces=true</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:34.867" endtime="20210629 11:32:34.868"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>customer</arg>
+</arguments>
+<assign>
+<var>${customer}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.868" level="INFO">${customer} = {'firstName': 'Nancy', 'lastName': 'Ang', '__typename': 'ReviewCustomer'}</msg>
+<status status="PASS" starttime="20210629 11:32:34.868" endtime="20210629 11:32:34.868"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${customer}</arg>
+<arg>firstName</arg>
+</arguments>
+<assign>
+<var>${firstName}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.868" level="INFO">${firstName} = Nancy</msg>
+<status status="PASS" starttime="20210629 11:32:34.868" endtime="20210629 11:32:34.869"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//div[contains(@class,'styles_reviewItemCustomerInfo__')])[1]//P[1]</arg>
+</arguments>
+<assign>
+<var>${firstNameFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.886" level="INFO">${firstNameFromUI} = Nancy</msg>
+<status status="PASS" starttime="20210629 11:32:34.869" endtime="20210629 11:32:34.886"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${firstNameFromUI}</arg>
+<arg>${firstName}</arg>
+<arg>strip_spaces=true</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:34.886" endtime="20210629 11:32:34.886"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${review}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.886" level="INFO">${review} = {'reviewId': 'd6cac3fd-d6d5-4528-b6f8-ee16437405f9', 'rating': 4.0, 'content': {'comment': 'The price from pelago was more expensive compared to buying on the spot.\nThe race was good, but it will be ...</msg>
+<status status="PASS" starttime="20210629 11:32:34.886" endtime="20210629 11:32:34.886"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>rating</arg>
+</arguments>
+<assign>
+<var>${rating}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.887" level="INFO">${rating} = 4.0</msg>
+<status status="PASS" starttime="20210629 11:32:34.887" endtime="20210629 11:32:34.887"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<arguments>
+<arg>xpath:(//div[1][@class='styles_reviewItemRow__3r1wA'])[2]//fieldset</arg>
+<arg>title</arg>
+</arguments>
+<assign>
+<var>${ratingFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.899" level="INFO">${ratingFromUI} = 4</msg>
+<status status="PASS" starttime="20210629 11:32:34.887" endtime="20210629 11:32:34.899"></status>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<arguments>
+<arg>${ratingFromUI}</arg>
+<arg>${rating}</arg>
+<arg>ignore_case=true</arg>
+</arguments>
+<msg timestamp="20210629 11:32:34.899" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'float'&gt;</msg>
+<status status="PASS" starttime="20210629 11:32:34.899" endtime="20210629 11:32:34.899"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>comment</arg>
+</arguments>
+<assign>
+<var>${comment}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.900" level="INFO">${comment} = The price from pelago was more expensive compared to buying on the spot.
+The race was good, but it will be good to give all participants an online certificate, i had that when I visited go-kart in Aus...</msg>
+<status status="PASS" starttime="20210629 11:32:34.899" endtime="20210629 11:32:34.900"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//p[contains(@class,'styles_reviewItemComment__')])[2]</arg>
+</arguments>
+<assign>
+<var>${commentFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.915" level="INFO">${commentFromUI} = The price from pelago was more expensive compared to buying on the spot. The race was good, but it will be good to give all participants an online certificate, i had that when I visited go-kart in Aus...</msg>
+<status status="PASS" starttime="20210629 11:32:34.900" endtime="20210629 11:32:34.915"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>travellerType</arg>
+</arguments>
+<assign>
+<var>${travellerType}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.916" level="INFO">${travellerType} = Family (with teens)</msg>
+<status status="PASS" starttime="20210629 11:32:34.916" endtime="20210629 11:32:34.916"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//div[contains(@class,'styles_reviewItemCustomerInfo__')])[2]//P[2]</arg>
+</arguments>
+<assign>
+<var>${travellerTypeFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.934" level="INFO">${travellerTypeFromUI} = Family (with teens)</msg>
+<status status="PASS" starttime="20210629 11:32:34.916" endtime="20210629 11:32:34.934"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${travellerTypeFromUI}</arg>
+<arg>${travellerType}</arg>
+<arg>strip_spaces=true</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:34.934" endtime="20210629 11:32:34.934"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>customer</arg>
+</arguments>
+<assign>
+<var>${customer}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.935" level="INFO">${customer} = {'firstName': 'Nancy', 'lastName': 'Ang', '__typename': 'ReviewCustomer'}</msg>
+<status status="PASS" starttime="20210629 11:32:34.935" endtime="20210629 11:32:34.935"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${customer}</arg>
+<arg>firstName</arg>
+</arguments>
+<assign>
+<var>${firstName}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.935" level="INFO">${firstName} = Nancy</msg>
+<status status="PASS" starttime="20210629 11:32:34.935" endtime="20210629 11:32:34.935"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//div[contains(@class,'styles_reviewItemCustomerInfo__')])[2]//P[1]</arg>
+</arguments>
+<assign>
+<var>${firstNameFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.951" level="INFO">${firstNameFromUI} = Nancy</msg>
+<status status="PASS" starttime="20210629 11:32:34.935" endtime="20210629 11:32:34.951"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${firstNameFromUI}</arg>
+<arg>${firstName}</arg>
+<arg>strip_spaces=true</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:34.951" endtime="20210629 11:32:34.952"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>2</arg>
+</arguments>
+<assign>
+<var>${review}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.952" level="INFO">${review} = {'reviewId': 'a7d1c909-0f35-44c5-8adc-2c7bc9bed844', 'rating': 5.0, 'content': {'comment': 'Definitely worth going for the track experience and 50km/h karts (license needed, picture or actual card) Fu...</msg>
+<status status="PASS" starttime="20210629 11:32:34.952" endtime="20210629 11:32:34.952"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>rating</arg>
+</arguments>
+<assign>
+<var>${rating}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.952" level="INFO">${rating} = 5.0</msg>
+<status status="PASS" starttime="20210629 11:32:34.952" endtime="20210629 11:32:34.952"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<arguments>
+<arg>xpath:(//div[1][@class='styles_reviewItemRow__3r1wA'])[3]//fieldset</arg>
+<arg>title</arg>
+</arguments>
+<assign>
+<var>${ratingFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.964" level="INFO">${ratingFromUI} = 5</msg>
+<status status="PASS" starttime="20210629 11:32:34.952" endtime="20210629 11:32:34.964"></status>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<arguments>
+<arg>${ratingFromUI}</arg>
+<arg>${rating}</arg>
+<arg>ignore_case=true</arg>
+</arguments>
+<msg timestamp="20210629 11:32:34.965" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'float'&gt;</msg>
+<status status="PASS" starttime="20210629 11:32:34.964" endtime="20210629 11:32:34.965"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>comment</arg>
+</arguments>
+<assign>
+<var>${comment}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.965" level="INFO">${comment} = Definitely worth going for the track experience and 50km/h karts (license needed, picture or actual card) Fun to race with your friends and family </msg>
+<status status="PASS" starttime="20210629 11:32:34.965" endtime="20210629 11:32:34.965"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//p[contains(@class,'styles_reviewItemComment__')])[3]</arg>
+</arguments>
+<assign>
+<var>${commentFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.981" level="INFO">${commentFromUI} = Definitely worth going for the track experience and 50km/h karts (license needed, picture or actual card) Fun to race with your friends and family</msg>
+<status status="PASS" starttime="20210629 11:32:34.965" endtime="20210629 11:32:34.981"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>travellerType</arg>
+</arguments>
+<assign>
+<var>${travellerType}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.981" level="INFO">${travellerType} = Group of Friends</msg>
+<status status="PASS" starttime="20210629 11:32:34.981" endtime="20210629 11:32:34.981"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//div[contains(@class,'styles_reviewItemCustomerInfo__')])[3]//P[2]</arg>
+</arguments>
+<assign>
+<var>${travellerTypeFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.997" level="INFO">${travellerTypeFromUI} = Group of Friends</msg>
+<status status="PASS" starttime="20210629 11:32:34.981" endtime="20210629 11:32:34.997"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${travellerTypeFromUI}</arg>
+<arg>${travellerType}</arg>
+<arg>strip_spaces=true</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:34.998" endtime="20210629 11:32:34.998"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>customer</arg>
+</arguments>
+<assign>
+<var>${customer}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.998" level="INFO">${customer} = {'firstName': 'Karan', 'lastName': 'Bhalodiya', '__typename': 'ReviewCustomer'}</msg>
+<status status="PASS" starttime="20210629 11:32:34.998" endtime="20210629 11:32:34.998"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${customer}</arg>
+<arg>firstName</arg>
+</arguments>
+<assign>
+<var>${firstName}</var>
+</assign>
+<msg timestamp="20210629 11:32:34.998" level="INFO">${firstName} = Karan</msg>
+<status status="PASS" starttime="20210629 11:32:34.998" endtime="20210629 11:32:34.999"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//div[contains(@class,'styles_reviewItemCustomerInfo__')])[3]//P[1]</arg>
+</arguments>
+<assign>
+<var>${firstNameFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.015" level="INFO">${firstNameFromUI} = Karan</msg>
+<status status="PASS" starttime="20210629 11:32:34.999" endtime="20210629 11:32:35.015"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${firstNameFromUI}</arg>
+<arg>${firstName}</arg>
+<arg>strip_spaces=true</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:35.015" endtime="20210629 11:32:35.015"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>3</arg>
+</arguments>
+<assign>
+<var>${review}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.015" level="INFO">${review} = {'reviewId': '05f5f47a-bf78-47ee-b253-50c8672955f6', 'rating': 5.0, 'content': {'comment': 'I booked Fun Karting at Kranji through Pelago. The entire booking experience was seamless.\nThe activity its...</msg>
+<status status="PASS" starttime="20210629 11:32:35.015" endtime="20210629 11:32:35.016"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>rating</arg>
+</arguments>
+<assign>
+<var>${rating}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.016" level="INFO">${rating} = 5.0</msg>
+<status status="PASS" starttime="20210629 11:32:35.016" endtime="20210629 11:32:35.016"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<arguments>
+<arg>xpath:(//div[1][@class='styles_reviewItemRow__3r1wA'])[4]//fieldset</arg>
+<arg>title</arg>
+</arguments>
+<assign>
+<var>${ratingFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.028" level="INFO">${ratingFromUI} = 5</msg>
+<status status="PASS" starttime="20210629 11:32:35.016" endtime="20210629 11:32:35.028"></status>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<arguments>
+<arg>${ratingFromUI}</arg>
+<arg>${rating}</arg>
+<arg>ignore_case=true</arg>
+</arguments>
+<msg timestamp="20210629 11:32:35.028" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'float'&gt;</msg>
+<status status="PASS" starttime="20210629 11:32:35.028" endtime="20210629 11:32:35.028"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>comment</arg>
+</arguments>
+<assign>
+<var>${comment}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.028" level="INFO">${comment} = I booked Fun Karting at Kranji through Pelago. The entire booking experience was seamless.
+The activity itself was pretty fun and thrilling, so much so that my friends and I ended up buying one more r...</msg>
+<status status="PASS" starttime="20210629 11:32:35.028" endtime="20210629 11:32:35.028"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//p[contains(@class,'styles_reviewItemComment__')])[4]</arg>
+</arguments>
+<assign>
+<var>${commentFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.045" level="INFO">${commentFromUI} = I booked Fun Karting at Kranji through Pelago. The entire booking experience was seamless. The activity itself was pretty fun and thrilling, so much so that my friends and I ended up buying one more r...</msg>
+<status status="PASS" starttime="20210629 11:32:35.028" endtime="20210629 11:32:35.045"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>travellerType</arg>
+</arguments>
+<assign>
+<var>${travellerType}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.046" level="INFO">${travellerType} = Group of Friends</msg>
+<status status="PASS" starttime="20210629 11:32:35.045" endtime="20210629 11:32:35.046"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//div[contains(@class,'styles_reviewItemCustomerInfo__')])[4]//P[2]</arg>
+</arguments>
+<assign>
+<var>${travellerTypeFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.062" level="INFO">${travellerTypeFromUI} = Group of Friends</msg>
+<status status="PASS" starttime="20210629 11:32:35.046" endtime="20210629 11:32:35.062"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${travellerTypeFromUI}</arg>
+<arg>${travellerType}</arg>
+<arg>strip_spaces=true</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:35.062" endtime="20210629 11:32:35.062"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>customer</arg>
+</arguments>
+<assign>
+<var>${customer}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.063" level="INFO">${customer} = {'firstName': 'Vipin Pal', 'lastName': 'Singh', '__typename': 'ReviewCustomer'}</msg>
+<status status="PASS" starttime="20210629 11:32:35.062" endtime="20210629 11:32:35.063"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${customer}</arg>
+<arg>firstName</arg>
+</arguments>
+<assign>
+<var>${firstName}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.063" level="INFO">${firstName} = Vipin Pal</msg>
+<status status="PASS" starttime="20210629 11:32:35.063" endtime="20210629 11:32:35.063"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//div[contains(@class,'styles_reviewItemCustomerInfo__')])[4]//P[1]</arg>
+</arguments>
+<assign>
+<var>${firstNameFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.079" level="INFO">${firstNameFromUI} = Vipin Pal</msg>
+<status status="PASS" starttime="20210629 11:32:35.063" endtime="20210629 11:32:35.079"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${firstNameFromUI}</arg>
+<arg>${firstName}</arg>
+<arg>strip_spaces=true</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:35.079" endtime="20210629 11:32:35.080"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${apiResponse}</arg>
+<arg>4</arg>
+</arguments>
+<assign>
+<var>${review}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.080" level="INFO">${review} = {'reviewId': '2cb69f9f-03e4-46c4-87b6-9ac99ff962ab', 'rating': 5.0, 'content': {'title': 'None', 'comment': "Booked the Advance karting for 5 of us then decided to go for Novice on d-day cos after loo...</msg>
+<status status="PASS" starttime="20210629 11:32:35.080" endtime="20210629 11:32:35.080"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>rating</arg>
+</arguments>
+<assign>
+<var>${rating}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.080" level="INFO">${rating} = 5.0</msg>
+<status status="PASS" starttime="20210629 11:32:35.080" endtime="20210629 11:32:35.080"></status>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<arguments>
+<arg>xpath:(//div[1][@class='styles_reviewItemRow__3r1wA'])[5]//fieldset</arg>
+<arg>title</arg>
+</arguments>
+<assign>
+<var>${ratingFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.092" level="INFO">${ratingFromUI} = 5</msg>
+<status status="PASS" starttime="20210629 11:32:35.080" endtime="20210629 11:32:35.092"></status>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<arguments>
+<arg>${ratingFromUI}</arg>
+<arg>${rating}</arg>
+<arg>ignore_case=true</arg>
+</arguments>
+<msg timestamp="20210629 11:32:35.092" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'float'&gt;</msg>
+<status status="PASS" starttime="20210629 11:32:35.092" endtime="20210629 11:32:35.092"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>comment</arg>
+</arguments>
+<assign>
+<var>${comment}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.093" level="INFO">${comment} = Booked the Advance karting for 5 of us then decided to go for Novice on d-day cos after looking other group who took Advance it was too fast &amp; scary. Had the impression that 10 minutes would be too sh...</msg>
+<status status="PASS" starttime="20210629 11:32:35.092" endtime="20210629 11:32:35.093"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//p[contains(@class,'styles_reviewItemComment__')])[5]</arg>
+</arguments>
+<assign>
+<var>${commentFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.109" level="INFO">${commentFromUI} = Booked the Advance karting for 5 of us then decided to go for Novice on d-day cos after looking other group who took Advance it was too fast &amp; scary. Had the impression that 10 minutes would be too sh...</msg>
+<status status="PASS" starttime="20210629 11:32:35.093" endtime="20210629 11:32:35.109"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>travellerType</arg>
+</arguments>
+<assign>
+<var>${travellerType}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.110" level="INFO">${travellerType} = Group of Friends</msg>
+<status status="PASS" starttime="20210629 11:32:35.109" endtime="20210629 11:32:35.110"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//div[contains(@class,'styles_reviewItemCustomerInfo__')])[5]//P[2]</arg>
+</arguments>
+<assign>
+<var>${travellerTypeFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.126" level="INFO">${travellerTypeFromUI} = Group of Friends</msg>
+<status status="PASS" starttime="20210629 11:32:35.110" endtime="20210629 11:32:35.126"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${travellerTypeFromUI}</arg>
+<arg>${travellerType}</arg>
+<arg>strip_spaces=true</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:35.127" endtime="20210629 11:32:35.127"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${review}</arg>
+<arg>customer</arg>
+</arguments>
+<assign>
+<var>${customer}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.128" level="INFO">${customer} = {'firstName': 'Kezia', 'lastName': 'Jenissa ', '__typename': 'ReviewCustomer'}</msg>
+<status status="PASS" starttime="20210629 11:32:35.127" endtime="20210629 11:32:35.128"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${customer}</arg>
+<arg>firstName</arg>
+</arguments>
+<assign>
+<var>${firstName}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.128" level="INFO">${firstName} = Kezia</msg>
+<status status="PASS" starttime="20210629 11:32:35.128" endtime="20210629 11:32:35.128"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>(//div[contains(@class,'styles_reviewItemCustomerInfo__')])[5]//P[1]</arg>
+</arguments>
+<assign>
+<var>${firstNameFromUI}</var>
+</assign>
+<msg timestamp="20210629 11:32:35.145" level="INFO">${firstNameFromUI} = Kezia</msg>
+<status status="PASS" starttime="20210629 11:32:35.128" endtime="20210629 11:32:35.145"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${firstNameFromUI}</arg>
+<arg>${firstName}</arg>
+<arg>strip_spaces=true</arg>
+</arguments>
+<status status="PASS" starttime="20210629 11:32:35.145" endtime="20210629 11:32:35.145"></status>
+</kw>
+<kw name="Close Window" library="Selenium2Library">
+<doc>Closes currently opened and selected browser window/tab.</doc>
+<status status="PASS" starttime="20210629 11:32:35.146" endtime="20210629 11:32:35.220"></status>
+</kw>
+<status status="PASS" starttime="20210629 11:32:29.271" endtime="20210629 11:32:35.220"></status>
+</kw>
+<status status="PASS" starttime="20210629 11:32:29.270" endtime="20210629 11:32:35.221" critical="yes"></status>
+</test>
+<test id="s1-t3" name="Verify the error msg when invalid product id is given">
+<kw name="Pelago Error Msg For Product Info" library="pelagoProductRequest">
+<arguments>
+<arg>test</arg>
+</arguments>
+<msg timestamp="20210629 11:32:35.670" level="INFO">{'data': {'product': {'errorMessage': 'test product not found', 'code': 404, '__typename': 'PelagoError'}}}</msg>
+<status status="PASS" starttime="20210629 11:32:35.222" endtime="20210629 11:32:35.670"></status>
+</kw>
+<status status="PASS" starttime="20210629 11:32:35.221" endtime="20210629 11:32:35.671" critical="yes"></status>
+</test>
+<test id="s1-t4" name="Verify the error msg for review API when invalid product id is given">
+<kw name="Pelago Error Msg For Review" library="pelagoProductRequest">
+<arguments>
+<arg>test</arg>
+</arguments>
+<msg timestamp="20210629 11:32:36.015" level="INFO">{'data': {'productReviews': {'reviews': [], 'reviewCount': 0, '__typename': 'ReviewHistory'}}}</msg>
+<status status="PASS" starttime="20210629 11:32:35.673" endtime="20210629 11:32:36.015"></status>
+</kw>
+<status status="PASS" starttime="20210629 11:32:35.672" endtime="20210629 11:32:36.016" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20210629 11:32:22.117" endtime="20210629 11:32:36.018"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0">Critical Tests</stat>
+<stat pass="4" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="4" fail="0" id="s1" name="pelagoTestSuite">pelagoTestSuite</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
