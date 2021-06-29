@@ -13,7 +13,7 @@ Installation guide for robotframework:
 
 Automation Type : API
 
-Breif on the project :
+Breif on the Automation Strategy :
 My whole idea for this automation was to perform validations between API response and UI, as UI was not working for dev.pelago have used pelago website to perform some operations, following things has been done to acheive this automation
 
 1. Python script is prepared for getting the response from APIs for valid and invalid data so it can be further use in the validation part
